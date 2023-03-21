@@ -14,13 +14,15 @@
   # $ nix search wget
    environment.systemPackages = with pkgs; [
      vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-#     git
+     git
 #     unzip
-#     enlightenment.terminology
+     enlightenment.terminology
 #     wget
      curl
 #     wireshark
 #     cutter
+      dmenu
+      #haskellPackages.xmobar
    ];
 
   # Bootloader
@@ -34,72 +36,28 @@
   # Set your time zone.
    time.timeZone = "Europe/Stockholm";
 
-  # Should activate virtualbox guest additions.
+  # Activate virtualbox guest additions.
   virtualisation.virtualbox.guest.enable = true;
   virtualisation.virtualbox.guest.x11 = true;
 
-  # Select internationalisation properties.
-  # i18n.defaultLocale = "en_GB.UTF-8";
-  # i18n.extraLocaleSettings = {
-  # LC_ADDRESS = "sv_SE.UTF-8";
-  # LC_IDENTIFICATION = 	"sv_SE.UTF-8";
-  # LC_MEASURMENT = "sv_SE.UTF-8";
-  # LC_MONETARY = "sv_SE.UTF-8";
-  # LC_NAME    = "sv_SE.UTF-8";
-  # LC_NUMERIC = "sv_SE.UTF-8";
-  # LC_PAPER   = "sv_SE.UTF-8";
-  # LC_TELEPHONE = "sv_SE.UTF-8";
-  # LC_TIME = "sv_SE.UTF-8";
-  # };
-
-  # Enable the X11 windowing system
-  services.xserver.enable = true;
-
-  # Enable desktop
-  services.xserver.desktopManager.gnome.enable = true;
 
   # Exlude default packages
-  services.gnome.core-utilities.enable = false;
+  # services.gnome.core-utilities.enable = false;
 
-  # Enable Xmonad window manager
-  services.xserver.desktopManager.gnome.flashback.customSessions = [
-    {
-     wmName = "xmonad";
-     wmLabel = "XMonad";
-     wmCommand = "${pkgs.haskellPackages.xmonad}/bin/xmonad";
-     enableGnomePanel = false;
-    }
-  ];
-
-  # Exclude unwanted packages
-  #environment.gnome.excludePackages = environment.gnome.defaultFavoriteAppsOverride; #(with pkgs; [
-    #gnome-photos
-    #gnome-tour
-  #]) ++ (with pkgs.gnome; [
-    #cheese
-    #gnome-music
-    #gedit
-    #epiphany
-    #geary
-    #evince
-    #totem
-  #]);
-
-  
-
-  # Configure keymap in X11
+  # Configure keymap, window- desktop- and displaymanager.
    services.xserver = {
+     enable = true;
      layout = "se";
      xkbVariant = "mac";
+     windowManager.xmonad = {
+         enable = true;
+         enableContribAndExtras = true;
+     };
+     desktopManager.xterm.enable = false;
+     displayManager.defaultSession = "none+xmonad";
    };
   # Configure keymap in X11
   console.keyMap = "sv-latin1";
-
-  # services.xserver.xkbOptions = {
-  #   "eurosign:e";
-  #   "caps:escape" # map caps to escape.
-  # };
-
 
 
 
