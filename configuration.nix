@@ -10,6 +10,11 @@
       ./hardware-configuration.nix
     ];
 
+  # UEFI boot with systemd
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
    environment.systemPackages = with pkgs; [
@@ -25,9 +30,6 @@
       #haskellPackages.xmobar
    ];
 
-  # Bootloader
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/sda";
 
    networking.hostName = "nixos"; # Define your hostname.
   # Pick only one of the below networking options.
@@ -37,14 +39,11 @@
    time.timeZone = "Europe/Stockholm";
 
   # Activate virtualbox guest additions.
-  virtualisation.virtualbox.guest.enable = true;
+  # virtualisation.virtualbox.guest.enable = true; # generated in hardware-configuration.nix.
   virtualisation.virtualbox.guest.x11 = true;
 
 
-  # Exlude default packages
-  # services.gnome.core-utilities.enable = false;
-
-  # Configure keymap, window- desktop- and displaymanager.
+  # Configure Swedish keymap and Xmonad windowmanager. 
    services.xserver = {
      enable = true;
      layout = "se";
