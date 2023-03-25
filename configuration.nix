@@ -25,6 +25,7 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
+   environment.variables.EDITOR = "vim";
    environment.systemPackages = with pkgs; [
      vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
      git
@@ -76,7 +77,8 @@
      hashedPassword = "$6$eAv2VnGROIaWSh/Z$uoUfLQmCOG70Vy7Z3naoAqR6P1qIOzM1/WJmvLX3FUFWbkYXPsfF.LvrMHnDZKtpDho5YJ/q9ZPzGkV9uGU0o.";
    };
 
-
+  sound.enable = true;
+  hardware.pulseaudio.enable = true;
 
 
 
