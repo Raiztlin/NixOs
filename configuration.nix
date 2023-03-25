@@ -10,6 +10,14 @@
       ./hardware-configuration.nix
     ];
 
+  # Optimise store and activate experimental features.
+  nix.settings = {
+    auto-optimise-store = true;
+    experimental-features = [ "nix-command" ];
+  };
+
+  
+
   # UEFI boot with systemd
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -48,6 +56,7 @@
      enable = true;
      layout = "se";
      xkbVariant = "mac";
+     excludePackages = [pkgs.xterm];
      windowManager.xmonad = {
          enable = true;
          enableContribAndExtras = true;
