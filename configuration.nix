@@ -65,6 +65,10 @@
      desktopManager.xterm.enable = false;
      displayManager.defaultSession = "none+xmonad";
    };
+
+  # Disable ssh askpassword.
+  programs.ssh.enableAskPassword = false;
+
   # Configure keymap in X11
   console.keyMap = "sv-latin1";
 
@@ -77,8 +81,11 @@
      hashedPassword = "$6$eAv2VnGROIaWSh/Z$uoUfLQmCOG70Vy7Z3naoAqR6P1qIOzM1/WJmvLX3FUFWbkYXPsfF.LvrMHnDZKtpDho5YJ/q9ZPzGkV9uGU0o.";
    };
 
+  # Enable sound.
   sound.enable = true;
   hardware.pulseaudio.enable = true;
+
+
 
 
 
